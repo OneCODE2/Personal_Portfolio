@@ -1,0 +1,86 @@
+/* General Styles */
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Dark Mode Background */
+.dark-mode-background {
+    background-color: #1c1e22; /* Deep dark-gray */
+    color: #ffffff; /* Default text color for dark mode */
+}
+
+/* Light Mode Background with Gradient */
+.light-mode-background {
+    background: linear-gradient(135deg, #f7f7f7, #e3e9ef); /* Subtle light gradient */
+    color: #1a1a1a; /* Dark text for readability */
+}
+
+/* Section Styling */
+.resume-container {
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 1.5rem auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Styling */
+.resume-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Resume Content Section */
+.resume-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.resume-icon {
+    margin-right: 1rem;
+}
+
+.resume-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.resume-description {
+    font-size: 1rem;
+}
+
+/* Button Styling */
+.btn-sumit {
+    border: 1px solid #1A1A1A;
+    padding: 0.5rem 1rem;
+    background-color: #f0f0f0; /* Light gray for buttons in light mode */
+    color: #1A1A1A;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-sumit:hover {
+    background-color: #dcdcdc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .resume-title {
+        font-size: 1.8rem;
+    }
+
+    .resume-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .resume-icon {
+        margin-bottom: 1rem;
+    }
+}
