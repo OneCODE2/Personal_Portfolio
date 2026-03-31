@@ -1,237 +1,97 @@
-import React from "react";
-import { FaInstagram, FaLinkedin, FaLaptopCode, FaRegUser } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaInstagram, FaLinkedin } from "react-icons/fa";
 import { BsGithub } from "react-icons/bs";
+import { AiOutlineFilePdf, AiOutlineMail } from "react-icons/ai";
 import { CiMobile4 } from "react-icons/ci";
-import { IoLocationSharp } from "react-icons/io5";
-import { AiTwotoneMail, AiOutlineSafetyCertificate } from "react-icons/ai";
-import { TiContacts } from "react-icons/ti";
-import { NavLink } from "react-router-dom";
-import "../Components/Global.css";
 import project from "./SocialLinks/PassProfile.jpg";
+import { portfolioData } from "../data/portfolioData";
 
+const socialButtonStyle = { background: "var(--surface-muted)" };
 
-const Profile = ({ show, setShow, darkmode, bgcolor, setCross }) => {
-  const handleCross = () => {
-    setCross(false);
-    setShow(false);
-  };
+const Profile = ({ mode = "desktop" }) => {
+  const { identity, social, contact } = portfolioData;
+  const [showContacts, setShowContacts] = useState(false);
+
+  if (mode === "mobile") {
+    return (
+      <div className="rounded-2xl p-4" style={{ background: "var(--surface-elevated)", border: "1px solid var(--border-subtle)", boxShadow: "var(--outline-glow)" }}>
+        <div className="flex justify-end pt-1 pb-3">
+          <button
+            type="button"
+            className="wave-btn px-3 py-2 rounded-lg text-xs font-medium"
+            style={{ background: "var(--surface-muted)", color: "var(--color-accent)", border: "1px solid var(--border-subtle)" }}
+            onClick={() => setShowContacts((value) => !value)}
+          >
+            {showContacts ? "Hide Contacts" : "Show Contacts"}
+          </button>
+        </div>
+
+        <div className="flex items-start gap-3 min-w-0">
+          <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0">
+            <img src={project} alt="Profile" className="w-full h-full object-cover" />
+          </div>
+
+          <div className="min-w-0  justify-center text-center ml-auto">
+            <p className="text-sm glow-text" style={{ color: "var(--color-accent)" }}>{identity.greeting}</p>
+            <h1 className="text-lg font-semibold leading-tight" style={{ color: "var(--color-text)" }}>{identity.name}</h1>
+            <p className="text-xs mt-1" style={{ color: "var(--color-text)" }}>Software Developer</p>
+          </div>
+        </div>
+
+        {showContacts && (
+          <>
+            <div className="w-full p-3 rounded-xl space-y-2 mt-4" style={{ background: "var(--surface-muted)" }}>
+              <p className="text-sm flex items-center gap-2" style={{ color: "var(--color-text)" }}><AiOutlineMail /> {contact.email}</p>
+              <p className="text-sm flex items-center gap-2" style={{ color: "var(--color-text)" }}><CiMobile4 /> {contact.phone}</p>
+            </div>
+
+            <div className="w-full pt-3 flex gap-2 justify-start">
+              <a href={social.linkedin} target="_blank" rel="noopener noreferrer" className="wave-btn rounded-lg p-2" style={socialButtonStyle}><FaLinkedin className="text-xl" style={{ color: "#0a66c2" }} /></a>
+              <a href={social.github} target="_blank" rel="noopener noreferrer" className="wave-btn rounded-lg p-2" style={socialButtonStyle}><BsGithub className="text-xl" style={{ color: "var(--color-text)" }} /></a>
+              <a href={social.instagram} target="_blank" rel="noopener noreferrer" className="wave-btn rounded-lg p-2" style={socialButtonStyle}><FaInstagram className="text-xl" style={{ color: "#e4405f" }} /></a>
+              <a href={social.resume} target="_blank" rel="noopener noreferrer" className="wave-btn rounded-lg p-2" style={socialButtonStyle}><AiOutlineFilePdf className="text-xl" style={{ color: "#e11d48" }} /></a>
+            </div>
+          </>
+        )}
+      </div>
+    );
+  }
 
   return (
-    <>
-      {/* Sidebar Section */}
-      {show && (
-        <div
-          className={`${
-            darkmode === "dark" ? `bg-${bgcolor}` : `bg-white`
-          } lg:w-11/12 md:w-8/12 sm:w-11/12 absolute sm:top-50 z-20`}
-        >
-          {/* About Section */}
-          <NavLink to="/">
-            <div
-              onClick={handleCross}
-              className={`bg-slate-200 rounded-lg flex items-center p-2 gap-1`}
-              style={{
-                background: `${bgcolor === "white" ? "#f3f6f6" : "#1D1D1D"}`,
-              }}
-            >
-              <FaRegUser className="text-xl" />
-              <h1
-                className={`text-sm my-1 ${
-                  bgcolor === "white" ? "text-black" : "text-white"
-                }`}
-              >
-                About
-              </h1>
-            </div>
-          </NavLink>
+    <div className="w-full rounded-2xl p-5 md:p-6" style={{ background: "var(--surface-elevated)", border: "1px solid var(--border-subtle)", boxShadow: "var(--outline-glow)" }}>
+      <div className="w-44 h-44 rounded-2xl overflow-hidden mx-auto">
+        <img src={project} alt="Profile" className="w-full h-full object-cover" />
+      </div>
 
-          {/* Projects Section */}
-          <NavLink to="/Projects">
-            <div
-              onClick={handleCross}
-              className="rounded-lg flex items-center p-2"
-              style={{
-                background: `${bgcolor === "white" ? "#f3f6f6" : "#1D1D1D"}`,
-              }}
-            >
-              <FaLaptopCode
-                className={`text-xl my-1 ${
-                  bgcolor === "white" ? "text-black" : "text-white"
-                }`}
-              />
-              <h1
-                className={`text-sm my-1 ${
-                  bgcolor === "white" ? "text-black" : "text-white"
-                }`}
-              >
-                Projects
-              </h1>
-            </div>
-          </NavLink>
+      <div className="text-center mt-5">
+        <p className="text-sm glow-text" style={{ color: "var(--color-accent)" }}>{identity.greeting}</p>
+        <h1 className="text-3xl font-semibold" style={{ color: "var(--color-text)" }}>{identity.heroName}</h1>
+        <p className="text-sm mt-1" style={{ color: "var(--color-text)" }}>{identity.headline}</p>
 
-          {/* Skills Section */}
-          <NavLink to="/Certify">
-            <div
-              onClick={handleCross}
-              className="rounded-lg flex items-center p-2"
-              style={{
-                background: `${bgcolor === "white" ? "#f3f6f6" : "#1D1D1D"}`,
-              }}
-            >
-              <AiOutlineSafetyCertificate
-                className={`text-xl my-1 ${
-                  bgcolor === "white" ? "text-black" : "text-white"
-                }`}
-              />
-              <h1
-                className={`text-sm my-1 ${
-                  bgcolor === "white" ? "text-black" : "text-white"
-                }`}
-              >
-                Skills
-              </h1>
-            </div>
-          </NavLink>
-
-          {/* Contact Section */}
-          <NavLink to="/Contact">
-            <div
-              onClick={handleCross}
-              className="rounded-lg flex items-center p-2"
-              style={{
-                background: `${bgcolor === "white" ? "#f3f6f6" : "#1D1D1D"}`,
-              }}
-            >
-              <TiContacts
-                className={`text-xl my-1 ${
-                  bgcolor === "white" ? "text-black" : "text-white"
-                }`}
-              />
-              <h1
-                className={`text-sm my-1 ${
-                  bgcolor === "white" ? "text-black" : "text-white"
-                }`}
-              >
-                Contact
-              </h1>
-            </div>
-          </NavLink>
-        </div>
-      )}
-
-      {/* Profile Card Section */}
-      <div className="w-full flex justify-around">
-        <div
-          className={`lg:w-80 sm:w-96 h-12/12 rounded-lg p-10 flex flex-col items-center relative gap-7 ${
-            darkmode === "dark" ? "bg-black" : "bg-white"
-          }`}
-        >
-          {/* Profile Image */}
-          <div className="w-40 h-40 rounded-full">
-            <img
-              src={project}
-              alt="Profile"
-              className="rounded-full object-cover"
-            />
-          </div>
-
-          {/* Name */}
-          <h1
-            className={`text-2xl font-bold ${
-              bgcolor === "white" ? "text-black" : "text-white"
-            }`}
-          >
-            <span className="font-bold">ADITYA GAJBHIYE</span>
-            
-          </h1>
-
-          {/* Title */}
-          <div
-            className="w-6/12 h-8 p-2"
-            style={{
-              background: `${bgcolor === "white" ? "#f3f6f6" : "#1D1D1D"}`,
-            }}
-          >
-            <h1
-              className="text-center text-sm"
-              style={{
-                color: `${bgcolor === "white" ? "#000000" : "#A6A6A6"}`,
-              }}
-            >
-              <span className="font-bold">SOFTWARE DEVELOPER</span>
-              
-            </h1>
-          </div>
-
-          {/* Social Links */}
-          <div className="w-96 p-2 flex gap-2 justify-center">
-            <a
-              href="https://www.linkedin.com/in/aditya-gajbhiye-9b6048230/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg hover:bg-blue-500 p-2"
-            >
-              <FaLinkedin className="text-2xl text-blue-600" />
-            </a>
-            <a
-              href="https://github.com/OneCODE2"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg hover:bg-blue-500 p-2"
-            >
-              <BsGithub
-                className="text-2xl"
-                style={{
-                  color: `${bgcolor === "white" ? "black" : "white"}`,
-                }}
-              />
-            </a>
-          </div>
-
-          {/* Contact Details */}
-          <div
-            className="w-68 p-4 flex flex-col gap-2 rounded-lg"
-            style={{
-              background: `${bgcolor === "white" ? "#f3f6f6" : "#1D1D1D"}`,
-            }}
-          >
-            {/* Phone */}
-            <div className="flex items-center gap-2 border-b p-1">
-              <div className="w-10 h-10 p-2 rounded-lg hover:bg-blue-500 flex items-center justify-center">
-                <CiMobile4 className="text-2xl text-pink-500 hover:text-white" />
-              </div>
-              <h1 className={`${bgcolor === "white" ? "text-black" : "text-white"}`}>
-                
-                <span className="font-bold">+918698720931</span>
-              </h1>
-            </div>
-
-            {/* Email */}
-            <div className="flex items-center gap-2 border-b p-1">
-              <div className="w-10 h-10 p-2 rounded-lg hover:bg-blue-500 flex items-center justify-center">
-                <AiTwotoneMail className="text-2xl text-sky-600 hover:text-white" />
-              </div>
-              <h1 className={`${bgcolor === "white" ? "text-black" : "text-white"}`}>
-              <span className="font-bold">adityagajbhiye125@gmail.com</span>
-                
-              </h1>
-            </div>
-
-            {/* Location */}
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 p-2 rounded-lg hover:bg-blue-500 flex items-center justify-center">
-                <IoLocationSharp className="text-2xl text-pink-600 hover:text-white" />
-              </div>
-              <h1 className={`${bgcolor === "white" ? "text-black" : "text-white"}`}>
-              <span className="font-bold">Nagpur, Maharashtra </span>
-               
-              </h1>
-            </div>
-          </div>
+        <div className="flex gap-2 flex-wrap justify-center mt-3">
+          {identity.roles.map((role) => (
+            <span key={role} className="px-3 py-1 text-xs rounded-full" style={{ background: "var(--surface-muted)", color: "var(--color-text)" }}>
+              {role}
+            </span>
+          ))}
         </div>
       </div>
-    </>
+
+      <div className="w-full p-4 rounded-xl space-y-3 mt-5" style={{ background: "var(--surface-muted)" }}>
+        <p className="text-sm flex items-center gap-2" style={{ color: "var(--color-text)" }}><AiOutlineMail /> {contact.email}</p>
+        <p className="text-sm flex items-center gap-2" style={{ color: "var(--color-text)" }}><CiMobile4 /> {contact.phone}</p>
+      </div>
+
+      <div className="w-full pt-4 flex gap-2 justify-center">
+        <a href={social.linkedin} target="_blank" rel="noopener noreferrer" className="wave-btn rounded-lg p-2" style={socialButtonStyle}><FaLinkedin className="text-2xl" style={{ color: "#0a66c2" }} /></a>
+        <a href={social.github} target="_blank" rel="noopener noreferrer" className="wave-btn rounded-lg p-2" style={socialButtonStyle}><BsGithub className="text-2xl" style={{ color: "var(--color-text)" }} /></a>
+        <a href={social.instagram} target="_blank" rel="noopener noreferrer" className="wave-btn rounded-lg p-2" style={socialButtonStyle}><FaInstagram className="text-2xl" style={{ color: "#e4405f" }} /></a>
+        <a href={social.resume} target="_blank" rel="noopener noreferrer" className="wave-btn rounded-lg p-2" style={socialButtonStyle}><AiOutlineFilePdf className="text-2xl" style={{ color: "#e11d48" }} /></a>
+      </div>
+    </div>
   );
 };
 
 export default Profile;
+
+

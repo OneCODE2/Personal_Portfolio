@@ -1,0 +1,89 @@
+.bulb-toggle-wrapper {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 60;
+  pointer-events: none;
+}
+
+.bulb-toggle-button {
+  pointer-events: auto;
+  width: 74px;
+  height: 74px;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.9), var(--surface-elevated));
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 200ms ease;
+  will-change: transform;
+  padding: 0;
+}
+
+.bulb-toggle-button--lit {
+  box-shadow: 0 0 0 1px rgba(255, 234, 150, 0.45), 0 0 18px rgba(255, 224, 99, 0.55), 0 0 42px rgba(255, 224, 99, 0.35), var(--shadow-soft);
+}
+
+.bulb-image {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(255, 224, 99, 0.5));
+}
+
+.bulb-image--broken {
+  width: 56px;
+  height: 56px;
+  filter: drop-shadow(0 0 7px rgba(180, 210, 255, 0.4));
+}
+
+.bulb-toggle-button:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.bulb-toggle-button:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.bulb-fragments {
+  position: absolute;
+  inset: -16px;
+  pointer-events: none;
+}
+
+.bulb-fragment {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 12px;
+  border-radius: 2px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.9), rgba(88, 166, 255, 0.45));
+  box-shadow: 0 0 12px rgba(88, 166, 255, 0.35);
+  will-change: transform, opacity;
+}
+
+@media (max-width: 768px) {
+  .bulb-toggle-wrapper {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+
+  .bulb-toggle-button {
+    width: 64px;
+    height: 64px;
+  }
+
+  .bulb-image {
+    width: 36px;
+    height: 36px;
+  }
+
+  .bulb-image--broken {
+    width: 46px;
+    height: 46px;
+  }
+}
