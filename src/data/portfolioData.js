@@ -157,7 +157,7 @@ export const portfolioData = {
   social: {
     github: "https://github.com/OneCODE2",
     linkedin: "https://www.linkedin.com/in/aditya-gajbhiye-9b6048230/",
-    instagram: "https://www.instagram.com",
+    instagram: "https://www.instagram.com/adityagajbhiye__",
     resume: "/resume/Aditya_Full_Stack.pdf",
   },
   loadingText: [
@@ -168,5 +168,6 @@ export const portfolioData = {
     "Welcome",
   ],
 };
+
 
 
